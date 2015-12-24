@@ -1,0 +1,20 @@
+{
+  "name": "html-socket-game",
+  "version": "1.0.0",
+  "description": "html socket game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.stargt.com.my:pan.feng/html-socket-game.git"
+  },
+  "keywords": [
+    "websocket",
+    "html",
+    "game"
+  ],
+  "author": "fengpan",
+  "license": "ISC"
+}
