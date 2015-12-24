@@ -1,4 +1,21 @@
-hello word
+<!DOCTYPE html>
+<html>
+<head>
+    <title>html game</title>
+    <script type="text/javascript" src="app.min.js"></script>
+</head>
+<body>
+    <div class="headbar"></div>
+    <div class="game-list">
+        <ul>
+            <li>国际象棋</li>
+        </ul>
+    </div>
+    <div class="main">
+
+    </div>
+</body>
+</html>
 
 <script>
     var ws = new WebSocket("ws://127.0.0.1:8000");
@@ -9,10 +26,9 @@ hello word
     ws.onopen = function(){
         console.log('open');
         ws.sendmessage({aa: 123});
-        setTimeout(function(){
-            ws.close();
-
-        }, 5000);
+//        setTimeout(function(){
+//            ws.close();
+//        }, 5000);
     };
 
     ws.onmessage = function(evt){

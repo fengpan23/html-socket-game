@@ -16,5 +16,8 @@
     "game"
   ],
   "author": "fengpan",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^0.8.1"
+  }
 }
