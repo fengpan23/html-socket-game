@@ -1,6 +1,6 @@
 "use strict";
 let webSocketServer = require('ws').Server
-let wss = new webSocketServer({ port: 8000 });
+let wss = new webSocketServer({port: 8000});
 
 wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {

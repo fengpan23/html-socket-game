@@ -18,6 +18,7 @@
   "author": "fengpan",
   "license": "ISC",
   "dependencies": {
-    "ws": "^0.8.1"
+    "mithril": "^0.2.2-rc.1",
+    "ws": "git+https://pan.feng:fengpan123@gitlab.stargt.com.my/pan.feng/ws.git"
   }
 }
