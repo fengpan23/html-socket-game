@@ -1,7 +1,7 @@
 module.exports = function(Application) {
     var Util = {
         _utils: {
-            //mdl: require('./mdlComponents.js')(Application),
+            ws: require('./webSocket.js')(Application),
             //mdlUpdate: require('./mdlUpdate.js')(Application),
             //queryString: require('querystring').stringify,
             //Chart: require('./chartConf.js')(Application),
