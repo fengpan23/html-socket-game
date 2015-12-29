@@ -5,6 +5,16 @@
     height: 800px;
     margin: auto;
 }
+.base-st{
+    width: 60px;
+    height: 60px;
+    display: block;
+    top: 120px;
+    position: absolute;
+    left: 800px;
+    background-repeat: no-repeat;
+    background-size: 60px;
+}
 
 .b_adviser{
     background: url("./img/b_adviser.png");
@@ -47,6 +57,6 @@
     background: url("./img/r_adviser.png");
 }
 .r_pawns{
-    background: url("./img/r_pawns.png");
+    background: url("./img/b_pawns.png");
 }
 

@@ -42,23 +42,23 @@ module.exports = function(App) {
                     R4_pawns: "7d",
                     R5_pawns: "9d",
                     R_king: "5a"}
-                ches && chess.flash(ches);
+                chess.ches = ches;
+                ches && chess.flash();
                 m.redraw();
             }, 2000)
         };
         chess.startInit = function () {
 
         };
-        chess.flash = function (data) {
-            console.log('data', data);
+        chess.flash = function (e) {
+            var data = chess.ches;
             var ct = [];
             if(data) {
                 for(var k in data){
                     var kk = [k.slice(0, 1).toLowerCase(), k.split('_')[1]].join('_');
                     var p = data[k].split("");
                     var t = {};
-                    t[kk] = {x: p[0], y: +p[1]};
-                    ct.push(t);
+                    ct.push([kk, {x: p[0], y: 1}]);
                 }
             }
             console.log('ct', ct);

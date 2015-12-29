@@ -5,10 +5,9 @@ module.exports = function(App) {
             m.component(App.Components['header']),
             m('MAIN', [
                 m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored', {onclick: chess.ready}, '准备'),
-                m('DIV.chinese-chess-chessboard', chess.flash().map(function (c, p) {
-                    console.log('c', c, ' p', p);
-
-                    return m('span', {class: c, style: {top: p.y, left: p.x}})
+                m('DIV.chinese-chess-chessboard', chess.flash().map(function (v) {
+                    console.log('c', v);
+                    return m('span.base-st', {class: v[0], style: {top: v[1].x, left: 1}})
                 }))
             ])
         ])
