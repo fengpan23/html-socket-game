@@ -36,17 +36,22 @@ Application.setUpRoutes = function() {
     this.m.route.mode = 'hash';
     this.m.route(document.getElementById('container'), "/", {
         "/": Application.Components['main'],
-        "/home": Application.Components['main']
+        "/home": Application.Components['main'],
+        "/games/chess": Application.Components['games_chess'],
+        "/games/chineseChess": Application.Components['games_chineseChess']
     });
 };
 
 Application.loadComponents = function () {
     var components = [
         'main',
-        'header'
+        'header',
+        'navigation',
+        'games_chess',
+        'games_chineseChess'
     ];
     components.forEach(function(com) {
-        Application.Components[com] = require('./components/' + com + '/_index.js')(Application);
+        Application.Components[com] = require('./components/' + com.split('_').join('/') + '/_index.js')(Application);
     });
 };
 
@@ -57,12 +62,13 @@ Application.loadUtils = function() {
     //other utils we defined in /utils/
     var UTIL_PATH = './utils'
     this.Util = require(UTIL_PATH + '/_index.js')(this);
-
 };
 
 Application.loadStylesheets = function() {
-    var STYLE_PATH = './styles/css';
-    require(STYLE_PATH + '/material.min.css');
-    require(STYLE_PATH + '/styles.css');
+    var STYLE_PATH = './styles/';
+    require(STYLE_PATH + 'css/material.min.css');
+    require(STYLE_PATH + 'css/styles.css');
+    require(STYLE_PATH + 'chess/main.css');
+    require(STYLE_PATH + 'chineseChess/main.css');
 };
 module.exports = Application;

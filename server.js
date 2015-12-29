@@ -1,81 +1,36 @@
 "use strict";
-let webSocketServer = require('ws').Server;
-let wss = new webSocketServer({port: 8000});
+
+let server = require('http').createServer()
+    , url = require('url')
+    , WebSocketServer = require('ws').Server
+    , wss = new WebSocketServer({server: server})
+    , express = require('express')
+    , app = express()
+    , port = 3000;
+
+//app.use(function (req, res) {
+//    res.send({ msg: "hello" });
+//});
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/dist'))
 
 wss.on('connection', function connection(ws) {
-    console.log('conent');
+    var location = url.parse(ws.upgradeReq.url, true);
+    //console.log('location', location);
+    // you might use location.query.access_token to authenticate or share sessions
+    // or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+
     ws.on('message', function incoming(message) {
         console.log('received: %s', message);
-        console.log('buffer', new Buffer('woca'));
-        ws.send('woca');
     });
-    ws.on('close', function close() {
-        console.log('disconnected');
-    });
-    //ws.send('something');
+
+    ws.send('something');
 });
 
-var url = require('url');
-var http = require('http');
-var path = require('fast-path');
-var createStatic = require('connect-static');
-
-let dynamicRouterMap = {
-}
-function onRequest(request, response) {
-    if ('POST' === request.method) {
-        response.status = 204;
-        return response.end();
-    }
-
-    if ('/favicon.ico' === path.resolve(request.url)) {
-        response.status = 204;
-        return response.end();
-    } else {
-        let u = url.parse(request.url, true);
-        var urlParts = u.pathname.split('/').filter(Boolean);
-        console.log('url parts : ', urlParts);
-
-        if (undefined === dynamicRouterMap[urlParts[0]]) {
-            response.status = 204;
-            return response.end();
-        } else {
-            dynamicRouterMap[urlParts[0]](request, response);
-        }
-    }
-}
-
-function start(port, host, callback) {
-    //port = port || global.config.port;
-    //host = host || global.config.host;
-    port = 3000;
-    host = '0.0.0.0';
-    var options = {
-        dir: 'public',
-        aliases: [
-            ['/', '/index.html']
-        ]
-    };
-    createStatic(options, function (error, staticMiddleware) {
-        if (error) throw error;
-
-        var server = http.createServer(function (req, res) {
-            staticMiddleware(req, res, onRequest.bind(null, req, res));
-        })
-            .listen(port, host, function () {
-                console.info('Server running at ' + host + ':' + port);
-                console.info('App version: ' + require('./package.json').version);
-                callback && callback(server);
-            });
-    });
-}
+server.on('request', app);
+server.listen(port, function (){console.log('Listening on ' + server.address().port)});
 
 process.on('unCaughtException', function(err) {
     console.log(err);
     process.exit(0);
 });
-
-exports.start = start;
-if (module.parent === null) {
-    start();
-}

@@ -1,0 +1,52 @@
+.chinese-chess-chessboard{
+    background-image: url("./img/chessboard.jpg");
+    background-repeat: round;
+    width: 800px;
+    height: 800px;
+    margin: auto;
+}
+
+.b_adviser{
+    background: url("./img/b_adviser.png");
+}
+.b_cannon{
+    background: url("./img/b_cannon.png");
+}
+.b_chariot{
+    background: url("./img/b_chariot.png");
+}
+.b_elephant{
+    background: url("./img/b_adviser.png");
+}
+.b_horse{
+    background: url("./img/b_adviser.png");
+}
+.b_king{
+    background: url("./img/b_adviser.png");
+}
+.b_pawns{
+    background: url("./img/b_pawns.png");
+}
+
+.r_adviser{
+    background: url("./img/r_adviser.png");
+}
+.r_cannon{
+    background: url("./img/r_cannon.png");
+}
+.r_chariot{
+    background: url("./img/r_chariot.png");
+}
+.r_elephant{
+    background: url("./img/r_adviser.png");
+}
+.r_horse{
+    background: url("./img/r_adviser.png");
+}
+.r_king{
+    background: url("./img/r_adviser.png");
+}
+.r_pawns{
+    background: url("./img/r_pawns.png");
+}
+

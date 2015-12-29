@@ -1,8 +1,9 @@
+var path = require('path');
 module.exports = {
 	entry: './public/index.js',
 	output: {
-		path: __dirname,
-		filename: './public/main.min.js'
+		path: __dirname + '/dist',
+		filename: 'main.min.js'
 	},
 	resolve:{
 		modulesDirectories:[
