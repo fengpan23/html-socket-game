@@ -35,16 +35,21 @@ Application.start = function() {
 Application.setUpRoutes = function() {
     this.m.route.mode = 'hash';
     this.m.route(document.getElementById('container'), "/", {
-        "/": Application.Components['main'],
+        "/": Application.Components['login'],
+        "/login": Application.Components['login'],
         "/home": Application.Components['main'],
         "/games/chess": Application.Components['games_chess'],
         "/games/chineseChess": Application.Components['games_chineseChess']
     });
+    if(!Application.session){
+        this.m.route('/login');
+    }
 };
 
 Application.loadComponents = function () {
     var components = [
         'main',
+        'login',
         'header',
         'navigation',
         'games_chess',
@@ -57,7 +62,7 @@ Application.loadComponents = function () {
 
 Application.loadUtils = function() {
     //here we can set some global utils such as _,$
-    //window._ = require('lodash');//underscore
+    window._ = require('underscore'); //underscore
 
     //other utils we defined in /utils/
     var UTIL_PATH = './utils'
@@ -67,7 +72,10 @@ Application.loadUtils = function() {
 Application.loadStylesheets = function() {
     var STYLE_PATH = './styles/';
     require(STYLE_PATH + 'css/material.min.css');
+    require(STYLE_PATH + 'css/main.css');
     require(STYLE_PATH + 'css/styles.css');
+    require(STYLE_PATH + 'css/login.css');
+
     require(STYLE_PATH + 'chess/main.css');
     require(STYLE_PATH + 'chineseChess/main.css');
 };

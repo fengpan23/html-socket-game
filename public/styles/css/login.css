@@ -1,0 +1,53 @@
+/* login page style */
+.login-bg-wrapper {
+    background-image: url("./img/login_bg.jpg");
+    background-repeat: no-repeat;
+    background-color: #000000;
+    background-size: cover;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.login-container {
+    width: 330px;
+    position: fixed;
+    right: 50px;
+    top: 150px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.login-title {
+    padding: 20px 0 0 30px;
+}
+
+#login-logo {
+    width: 100px;
+    vertical-align: middle;
+}
+
+.login-form {
+    padding: 30px;
+    padding-top: 20px;
+}
+
+.login-form .mdl-textfield__input {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+.login-form .mdl-textfield__label {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.login-form .mdl-textfield__label::after {
+    background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.login-submit-field {
+    margin-top: 20px;
+}
+
+.login-submit-field button {
+    width: 100%;
+    background-color: rgba(228, 62, 48, 0.9) !important;
+}

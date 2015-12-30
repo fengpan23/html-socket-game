@@ -1,19 +1,25 @@
+.game-snippet{
+    text-align: center;
+    margin: 25px;
+}
+.game-btn{
+    margin: 0 40px;
+}
 .chinese-chess-chessboard{
-    background-image: url("./img/chessboard.jpg");
+    background-image: url("./img/chessboard.png");
     background-repeat: round;
     width: 800px;
     height: 800px;
     margin: auto;
+    position: relative;
 }
 .base-st{
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     display: block;
-    top: 120px;
     position: absolute;
-    left: 800px;
+    background-size: 80px;
     background-repeat: no-repeat;
-    background-size: 60px;
 }
 
 .b_adviser{
@@ -26,13 +32,13 @@
     background: url("./img/b_chariot.png");
 }
 .b_elephant{
-    background: url("./img/b_adviser.png");
+    background: url("./img/b_elephant.png");
 }
 .b_horse{
-    background: url("./img/b_adviser.png");
+    background: url("./img/b_horse.png");
 }
 .b_king{
-    background: url("./img/b_adviser.png");
+    background: url("./img/b_king.png");
 }
 .b_pawns{
     background: url("./img/b_pawns.png");
@@ -48,15 +54,15 @@
     background: url("./img/r_chariot.png");
 }
 .r_elephant{
-    background: url("./img/r_adviser.png");
+    background: url("./img/r_elephant.png");
 }
 .r_horse{
-    background: url("./img/r_adviser.png");
+    background: url("./img/r_horse.png");
 }
 .r_king{
-    background: url("./img/r_adviser.png");
+    background: url("./img/r_king.png");
 }
 .r_pawns{
-    background: url("./img/b_pawns.png");
+    background: url("./img/r_pawns.png");
 }
 
