@@ -8,7 +8,6 @@ module.exports = function(){
         var ws = new WebSocket(SOCKET_CLIENT);
         ws.sendData = function(data){
             var d = JSON.stringify(data);
-            console.log(d);
             ws.send(d);
         };
         ws.onmessage = function (e) {
