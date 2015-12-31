@@ -63,7 +63,7 @@ Application.loadComponents = function () {
 Application.loadUtils = function() {
     //here we can set some global utils such as _,$
     window._ = require('underscore'); //underscore
-
+    window.$ = require('jquery/dist/jquery.min.js');//$
     //other utils we defined in /utils/
     var UTIL_PATH = './utils'
     this.Util = require(UTIL_PATH + '/_index.js')(this);

@@ -23,6 +23,7 @@ module.exports = function(){
         };
         ws.onopen = function(){
             console.log('open');
+            ws.sendData({aaa: 132});
         };
         ws.onclose = function(evt){
             console.log('WebSocketClosed!', evt);
