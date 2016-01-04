@@ -5,17 +5,18 @@ let HSocket = require('html-socket'),
     app = express(),
     port = 3000;
 
-//app.use(function (req, res) {
-//    res.send({ msg: "hello" });
+//app.use(function (req, res, next) {
+//    console.log(req.url);
+//    //res.send({ msg: "hello" });
+//    next();
 //});
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/dist'));
 
 app.listen(port, function (){console.log('Listening on ' + port)});
 
-
 let client = new HSocket.createClient({
-    ip: '127.0.0.1',
+    ip: 'localhost',
     gamePort: 8888,
     webPort: port
 });

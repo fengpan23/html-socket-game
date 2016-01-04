@@ -13,7 +13,8 @@ mithril.request = function (option) {
 var Application = {
     m: mithril,
     Util: {},
-    Components: {}
+    Components: {},
+    Games: {}
 };
 /**
  * 初始化，做一些基础配置, 加载模块后调用start
@@ -22,6 +23,7 @@ Application.init = function(config) {
     this.loadUtils();
     this.loadStylesheets();
     this.loadComponents();
+    this.loadGames();
     return this;
 };
 
@@ -38,8 +40,7 @@ Application.setUpRoutes = function() {
         "/": Application.Components['login'],
         "/login": Application.Components['login'],
         "/home": Application.Components['main'],
-        "/games/chess": Application.Components['games_chess'],
-        "/games/chineseChess": Application.Components['games_chineseChess']
+        "/games/:gameName": Application.Components['games']
     });
     if(!Application.session){
         this.m.route('/login');
@@ -52,11 +53,20 @@ Application.loadComponents = function () {
         'login',
         'header',
         'navigation',
-        'games_chess',
-        'games_chineseChess'
+        'games'
     ];
     components.forEach(function(com) {
-        Application.Components[com] = require('./components/' + com.split('_').join('/') + '/_index.js')(Application);
+        Application.Components[com] = require('./components/' + com + '/_index.js')(Application);
+    });
+};
+
+Application.loadGames = function () {
+    var games = [
+        'chess',
+        'chineseChess'
+    ];
+    games.forEach(function(game) {
+        Application.Games[game] = require('./components/games/' + game + '/_index.js')(Application);
     });
 };
 
@@ -64,6 +74,12 @@ Application.loadUtils = function() {
     //here we can set some global utils such as _,$
     window._ = require('underscore'); //underscore
     window.$ = require('jquery/dist/jquery.min.js');//$
+
+    window.vex = require('vex/js/vex.js');
+    window.vex.defaultOptions.className = 'vex-theme-plain';
+    require('vex/css/vex.css');
+    require('vex/css/vex-theme-plain.css');
+
     //other utils we defined in /utils/
     var UTIL_PATH = './utils'
     this.Util = require(UTIL_PATH + '/_index.js')(this);

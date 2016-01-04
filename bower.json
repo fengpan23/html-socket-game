@@ -1,0 +1,26 @@
+{
+  "name": "html-socket-game",
+  "description": "html socket game",
+  "main": "index.js",
+  "authors": [
+    "fengpan"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "websocket",
+    "html",
+    "game"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vex": "~2.3.3"
+  }
+}
