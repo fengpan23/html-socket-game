@@ -4,6 +4,10 @@
   "description": "html socket game",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npm install webpack -g & npm install bower -g",
+    "install": "bower install",
+    "prestart": "webpack",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -1,5 +1,5 @@
 "use strict";
-let HSocket = require('html-socket'),
+const HSocket = require('html-socket'),
     url = require('url'),
     express = require('express'),
     app = express(),
