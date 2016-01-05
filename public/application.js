@@ -21,6 +21,7 @@ var Application = {
  * 初始化，做一些基础配置, 加载模块后调用start
  */
 Application.init = function(config) {
+    Application.config = config;
     this.loadUtils();
     this.loadStylesheets();
     this.loadComponents();

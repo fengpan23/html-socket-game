@@ -7,7 +7,6 @@ module.exports = function (App) {
      * @param  option [options.className:'custom className', options.header:'header text', options.component]
      */
     modal.open = function (option) {
-
         modal.vex.open({
             content: '<header></header></div><div class="mount-root"></div>',
             className: this.vex.defaultOptions.className + " " + option.className,
@@ -23,7 +22,7 @@ module.exports = function (App) {
                     }
                 });
                 if(option.component){
-                    m.mount(rootElem, m.component(typeof option.component=== 'string' ? App.Games[option.component] : option.component, initOption));
+                    m.mount(rootElem, m.component(typeof option.component=== 'string' ? App.Games[option.component](option.game) : option.component, initOption));
                 }
             }
         });

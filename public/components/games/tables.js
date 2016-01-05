@@ -10,13 +10,12 @@ module.exports = function(App, ws) {
                     return [68, 69, 70];
                 },
                 openTable: function(e){
-                    console.log('gameName: ', gameName);
                     modal.open({
+                        game: {tableID: e.target.id, gameName: gameName},
                         component: gameName,
-                        className: 'userinfo',
-                        header: '添加用户'
+                        className: gameName,
+                        header: '国际象棋'
                     });
-                    console.log(e.target.id);
                 }
             }
         },

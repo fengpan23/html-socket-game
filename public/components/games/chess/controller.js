@@ -1,18 +1,15 @@
-module.exports = function(App) {
+module.exports = function(App, options) {
     var m = App.m;
     return function () {
         require('./chessboard.js');
         var ws = App.Util.get('ws');
 
-        console.log('router params: ', m.route.param("tableID"));
         //TODO get gameID and tableID at router ~!
-        var tableID = 68;
-        var gameID = '10000006';
-        var session = 'whx2';
+        //var session = 'whx2';
         ws.sendData("login", {
-            tableid : tableID,
-            gameid : gameID,
-            session : session
+            tableid : options.tableID,
+            gameid : App.config[options.gameName].id,
+            session : App.session
         });
         //TODO add table list when choose table  sitdown
         ws.sendData('sitdown');
@@ -23,7 +20,7 @@ module.exports = function(App) {
         };
         var event = {
             sitdown: function(data){
-                console.log('user ready', data);
+                console.log('user sitdown', data);
             },
             ready: function(data) {
                 console.log('user ready', data);
@@ -88,8 +85,8 @@ module.exports = function(App) {
 
         var chess = {
             chessman: [],
-            getComponent: function (){
-                return require('../user.js')(App, ws);
+            getComponent: function (name){
+                return require('../'+ name +'.js')(App, ws);
             }
         };
         chess.drawBoard = function () {
