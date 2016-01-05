@@ -1,3 +1,4 @@
+
 var mithril = require('mithril');
 /* override m.request to provide default cookie authentication */
 mithril._request = mithril.request.bind(mithril);
@@ -26,6 +27,7 @@ Application.init = function(config) {
     this.loadGames();
     return this;
 };
+
 
 /**
  * 程序入口
@@ -73,7 +75,7 @@ Application.loadGames = function () {
 Application.loadUtils = function() {
     //here we can set some global utils such as _,$
     window._ = require('underscore'); //underscore
-    window.$ = require('jquery/dist/jquery.min.js');//$
+    window.$ = require('jquery/dist/jquery.js');//$
 
     window.vex = require('vex/js/vex.js');
     window.vex.defaultOptions.className = 'vex-theme-plain';

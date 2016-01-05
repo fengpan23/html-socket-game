@@ -4,7 +4,7 @@
  */
 module.exports = function(){
     //var SOCKET_CLIENT = "ws://192.168.1.116:3000";
-    var SOCKET_CLIENT = "ws://192.168.1.120:3000";
+    var SOCKET_CLIENT = "ws://127.0.0.1:3000";
     var ws = new WebSocket(SOCKET_CLIENT);
     ws.connected = false;
     ws.sendData = function(event, content){
