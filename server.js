@@ -15,14 +15,14 @@ app.use(express.static(__dirname + '/dist'));
 
 app.listen(port, function (){console.log('Listening on ' + port)});
 
-//let client = new HSocket.createClient({
-//    ip: 'localhost',
-//    gamePort: 8888,
-//    webPort: port
-//});
-//client.on('error', function () {
-//    console.log('create html webSocket error !!!');
-//})
+let client = new HSocket.createClient({
+    ip: 'localhost',
+    gamePort: 8888,
+    webPort: port
+});
+client.on('error', function () {
+    console.log('create html webSocket error !!!');
+});
 process.on('unCaughtException', function(err) {
     console.log(err);
     process.exit(0);

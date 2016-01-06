@@ -7,6 +7,7 @@ module.exports = function (App) {
      * @param  option [options.className:'custom className', options.header:'header text', options.component]
      */
     modal.open = function (option) {
+        console.log('this.vex.defaultOptions.className + " " + option.className', this.vex.defaultOptions.className + " " + option.className);
         modal.vex.open({
             content: '<header></header></div><div class="mount-root"></div>',
             className: this.vex.defaultOptions.className + " " + option.className,

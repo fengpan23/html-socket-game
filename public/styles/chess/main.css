@@ -1,18 +1,18 @@
-.chess-chessboard{
-    background-image: url("./img/chessboard.jpg");
-    background-repeat: round;
-    width: 800px;
-    height: 800px;
-    margin: auto;
+.chess{
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+}
+.chess .vex-content{
+    width: 1050px !important;
+}
+.chess .vex-content .mount-root{
+    height: 750px;
+    width: 1000px;
 }
 #chessboard{
     width: 600px;
 }
 
-/*!
- * chessboard
- */
-/* clearfix */
 .clearfix-7da63 {
     clear: both;
 }
