@@ -1,7 +1,7 @@
 module.exports = function(Application) {
     var Util = {
         _utils: {
-            ws: require('./webSocket.js')(Application),
+            engine: require('./engine.js')(Application),
             //modal: require('./modal.js')(Application),
             //PADLocale: require('./pickadateLocale.js')
         }

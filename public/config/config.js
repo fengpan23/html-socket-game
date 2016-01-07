@@ -1,5 +1,10 @@
 module.exports = {
-    chess: {
-        id: '10000006'
-    }
+    games: {
+        chess: {
+            id: '10000006'
+        },
+        chineseChess: {
+        }
+    },
+    gameServer: ''
 };

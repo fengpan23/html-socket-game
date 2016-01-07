@@ -1,10 +1,14 @@
-module.exports = function(App, ws) {
+module.exports = function(App, engine) {
     var m = App.m;
     return {
         controller: function(){
             return {
                 ready: function(){
                     console.log('player ready');
+                    engine.join().then(function(){
+                        engine.sitDown(1);
+                        engine.ready();
+                    });
                     //TODO connect to the game server and ready game
                 },
                 exit: function(){
