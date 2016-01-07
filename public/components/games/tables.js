@@ -7,7 +7,7 @@ module.exports = function(App, ws) {
             return {
                 getTableList: function () {
                     //TODO get table list form server
-                    return [68, 69, 70];
+                    return [68, 68, 68];
                 },
                 openTable: function(e){
                     modal.open({

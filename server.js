@@ -13,7 +13,7 @@ const HSocket = require('html-socket'),
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/dist'));
 
-app.listen(port, function (){console.log('Listening on ' + port)});
+app.listen(port, function (){console.info('Listening port on ' + port)});
 
 let client = new HSocket.createClient({
     ip: 'localhost',
@@ -21,7 +21,7 @@ let client = new HSocket.createClient({
     webPort: port
 });
 client.on('error', function () {
-    console.log('create html webSocket error !!!');
+    console.error('Create game client error !!!');
 });
 process.on('unCaughtException', function(err) {
     console.log(err);

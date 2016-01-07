@@ -12,7 +12,7 @@ module.exports = function(App, options) {
             session : App.session
         });
         //TODO add table list when choose table  sitdown
-        ws.sendData('sitdown');
+        //ws.sendData('sitdown');
         
         ws.onData = function (data) {
             console.log('receive data: ', data);
