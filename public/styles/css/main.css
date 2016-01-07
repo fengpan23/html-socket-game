@@ -1,3 +1,9 @@
 main{
     padding: 20px;
 }
+.game-snippet{
+    text-align: center;
+}
+.game-btn{
+    margin: 0 5px;
+}

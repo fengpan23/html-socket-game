@@ -4,8 +4,6 @@ module.exports = function(App, options) {
         require('./chessboard.js');
         var ws = App.Util.get('ws');
 
-        //TODO get gameID and tableID at router ~!
-        //var session = 'whx2';
         ws.sendData("login", {
             tableid : options.tableID,
             gameid : App.config[options.gameName].id,
@@ -13,7 +11,7 @@ module.exports = function(App, options) {
         });
         //TODO add table list when choose table  sitdown
         //ws.sendData('sitdown');
-        
+
         ws.onData = function (data) {
             console.log('receive data: ', data);
             event[data.event] && event[data.event].call(data);

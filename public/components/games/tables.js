@@ -13,8 +13,7 @@ module.exports = function(App, ws) {
                     modal.open({
                         game: {tableID: e.target.id, gameName: gameName},
                         component: gameName,
-                        className: gameName,
-                        header: '国际象棋'
+                        className: gameName
                     });
                 }
             }
