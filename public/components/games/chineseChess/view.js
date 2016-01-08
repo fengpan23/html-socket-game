@@ -10,11 +10,7 @@ module.exports = function(App) {
             m('MAIN.mdl-layout__content mdl-color--grey-100', [
                 m('DIV.chinese-chess-chessboard', {onclick: chess.clickBoard}, chess.chessman.map(function (v) {
                     return m('span.base-st', {onclick: chess.clickChess, id: v[2], class: v[0], style: {left: v[1].x + 'px', top: v[1].y + 'px', backgroundSize: '80px'}})
-                })),
-                m('DIV.game-snippet', [
-                    m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: chess.ready}, '准备'),
-                    m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: chess.leave}, '退出')
-                ])
+                }))
             ])
         ])
     }

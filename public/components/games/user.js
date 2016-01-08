@@ -9,15 +9,11 @@ module.exports = function(App, engine) {
                         engine.sitDown(1);
                         engine.ready();
                     });
-                    //TODO connect to the game server and ready game
                 },
                 exit: function(){
                     console.log('player exit');
                 }
             }
-            //ws.onUserJoin = function (user) {
-            //    console.log(user)
-            //}
         },
         view: function(ctr){
             return m('DIV.demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop', [

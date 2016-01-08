@@ -43,7 +43,7 @@ Application.setUpRoutes = function() {
         "/": Application.Components['login'],
         "/login": Application.Components['login'],
         "/home": Application.Components['main'],
-        "/games/:gameName": Application.Components['games']
+        "/games/:gameName": Application.Components['room']
     });
     if(!Application.session){
         this.m.route('/login');
@@ -56,7 +56,7 @@ Application.loadComponents = function () {
         'login',
         'header',
         'navigation',
-        'games'
+        'room'
     ];
     components.forEach(function(com) {
         Application.Components[com] = require('./components/' + com + '/_index.js')(Application);

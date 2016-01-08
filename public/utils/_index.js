@@ -2,8 +2,7 @@ module.exports = function(Application) {
     var Util = {
         _utils: {
             engine: require('./engine.js')(Application),
-            //modal: require('./modal.js')(Application),
-            //PADLocale: require('./pickadateLocale.js')
+            modal: require('./modal.js')(Application)
         }
     };
     Util.get = function(name) {

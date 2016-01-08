@@ -1,10 +1,10 @@
-module.exports = function(App, ws) {
+module.exports = function(App) {
     var m = App.m;
     return {
         controller: function(){
             return {
                 loadComponent: function (name) {
-                    return require('./'+ name)(App, ws);
+                    return require('./'+ name)(App);
                 }
             }
         },

@@ -1,6 +1,7 @@
-module.exports = function(App, ws) {
+module.exports = function(App) {
+    var modal = App.Util.get('modal');
     var m = App.m;
-    var modal = require('./modal')(App);
+
     return {
         controller: function(){
             var gameName = m.route.param('gameName');
