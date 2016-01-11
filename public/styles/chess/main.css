@@ -2,6 +2,16 @@
     padding-top: 20px !important;
     padding-bottom: 20px !important;
 }
+.chess-table{
+
+}
+.chess-table .table-board{
+    width: 160px;
+    height: 160px;
+    margin: 20px;
+    background-image: url("./img/board.png");
+    background-size: cover;
+}
 .chess-header{
 
 }

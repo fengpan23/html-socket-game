@@ -7,3 +7,31 @@ main{
 .game-btn{
     margin: 0 5px;
 }
+.room{
+    background-image: url("./img/table-bg.png");
+    background-size: cover;
+}
+.table-list{
+
+}
+.table-item{
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin: 25px;
+    position: relative;
+}
+.table-seat{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    margin-left: -25px;
+}
+.seat-top{
+    top: -25px;
+    left: 50%;
+}
+.seat-bottom{
+    left: 50%;
+    bottom: -25px;
+}

@@ -6,9 +6,15 @@ module.exports = function(App) {
         controller: function(){
             var gameName = m.route.param('gameName');
             return {
+                getTableName: function () {
+                    return gameName;
+                },
                 getTableList: function () {
                     //TODO get table list form server
-                    return [68, 68, 68];
+                    return [68, 68, 68, 68, 68];
+                },
+                getSeat: function () {
+                    return [{id: 1, className: 'seat-top'}, {id: 2, className: 'seat-bottom'}];
                 },
                 openTable: function(e){
                     modal.open({
@@ -21,8 +27,11 @@ module.exports = function(App) {
         },
         view: function(ctr){
             return m('DIV.table-list', ctr.getTableList().map(function (tableID) {
-                    return m('DIV.demo-card-event mdl-card mdl-shadow--2dp', [
-                        m('DIV.mdl-card__title mdl-card--expand', {id: tableID, onclick: ctr.openTable})
+                    return m('DIV.table-item ' + ctr.getTableName() + '-table', [
+                        m('DIV.table-board', {id: tableID, onclick: ctr.openTable}),
+                        ctr.getSeat().map(function (seat) {
+                            return m('DIV.table-seat', seat);
+                        })
                     ]);
                 })
             )
