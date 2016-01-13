@@ -64,14 +64,12 @@ Application.loadComponents = function () {
 };
 
 Application.loadGames = function () {
-    var games = [
-        'chess',
-        'chineseChess',
-        'mahjong'
-    ];
-    games.forEach(function(game) {
-        Application.Games[game] = require('./components/games/' + game + '/_index.js')(Application);
-    });
+    var games = Application.config.games;
+    for(var game in games){
+        if(games[game].status === 'open'){
+            Application.Games[game] = require('./components/games/' + game + '/_index.js')(Application);
+        }
+    };
 };
 
 Application.loadUtils = function() {
@@ -96,7 +94,12 @@ Application.loadStylesheets = function() {
     require(STYLE_PATH + 'css/styles.css');
     require(STYLE_PATH + 'css/login.css');
 
-    require(STYLE_PATH + 'chess/main.css');
-    require(STYLE_PATH + 'chineseChess/main.css');
+    //load games styles
+    var games = Application.config.games;
+    for(var game in games){
+        if(games[game].status === 'open' && !games[game].noStyle){
+            require(STYLE_PATH + game + '/main.css');
+        }
+    };
 };
 module.exports = Application;
