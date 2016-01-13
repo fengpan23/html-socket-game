@@ -66,7 +66,8 @@ Application.loadComponents = function () {
 Application.loadGames = function () {
     var games = [
         'chess',
-        'chineseChess'
+        'chineseChess',
+        'mahjong'
     ];
     games.forEach(function(game) {
         Application.Games[game] = require('./components/games/' + game + '/_index.js')(Application);

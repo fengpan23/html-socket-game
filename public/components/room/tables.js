@@ -11,7 +11,8 @@ module.exports = function(App) {
                 },
                 getTableList: function () {
                     //TODO get table list form server
-                    return [68, 68, 68, 68, 68];
+                    var tableMap = {chess: [68, 68, 68, 68, 68], mahjong: [70, 70, 70, 70]}
+                    return tableMap[gameName];
                 },
                 getSeat: function () {
                     return [{id: 1, className: 'seat-top'}, {id: 2, className: 'seat-bottom'}];

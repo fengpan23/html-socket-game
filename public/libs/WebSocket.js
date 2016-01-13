@@ -1,6 +1,6 @@
 module.exports = function () {
     //var SOCKET_CLIENT = "ws://192.168.1.116:3000";
-    var SOCKET_CLIENT = "ws://127.0.0.1:8888";
+    var SOCKET_CLIENT = "ws://127.0.0.1:8091";
     var Event = require('./Event')();
     var Client = {
         connect: function () {
