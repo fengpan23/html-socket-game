@@ -1,14 +1,14 @@
-module.exports = function(Application) {
+module.exports = function(App) {
     var Util = {
         _utils: {
-            engine: require('./engine.js')(Application),
-            modal: require('./modal.js')(Application)
+            engine: require('./engine.js')(App),
+            modal: require('./modal.js')(App)
         }
     };
     Util.get = function(name) {
         return this._utils[name];
     };
-    Util.getUtils = function(key, value) {
+    Util.getUtils = function() {
         return this._utils;
     };
     return Util;

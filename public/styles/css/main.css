@@ -11,8 +11,11 @@ main{
     background-image: url("./img/table-bg.png");
     background-size: cover;
 }
-.table-list{
-
+.table-board{
+    width: 160px;
+    height: 160px;
+    margin: 20px;
+    background-size: cover;
 }
 .table-item{
     width: 200px;

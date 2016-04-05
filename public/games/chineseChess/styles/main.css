@@ -1,6 +1,9 @@
+.chineseChess-table .table-board{
+    background: url("./img/chessboard.png");
+}
+
 .chinese-chess-chessboard{
-    background-image: url("./img/chessboard.png");
-    background-repeat: round;
+    background: url("./img/chessboard.png");
     width: 800px;
     height: 800px;
     margin: auto;

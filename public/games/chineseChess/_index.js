@@ -6,7 +6,7 @@ module.exports = function(App) {
         }
     }
     chineseChess.navigation = {
-        name: '中国象棋',
+        name: App.config.games.chineseChess.name,
         icon: 'home'
     };
     return chineseChess;

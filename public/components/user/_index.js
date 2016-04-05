@@ -1,18 +1,9 @@
-module.exports = function(App, engine) {
+module.exports = function User(App) {
     var m = App.m;
     return {
         controller: function(){
             return {
-                ready: function(){
-                    console.log('player ready');
-                    engine.join().then(function(){
-                        engine.sitDown(1);
-                        engine.ready();
-                    });
-                },
-                exit: function(){
-                    console.log('player exit');
-                }
+
             }
         },
         view: function(ctr){
@@ -23,8 +14,8 @@ module.exports = function(App, engine) {
                 ]),
                 m('DIV.mdl-card__supporting-text mdl-color-text--grey-600', [
                     m('DIV.game-snippet', [
-                        m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: ctr.ready}, '准备'),
-                        m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: ctr.exit}, '退出')
+                        //m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: ctr.ready}, '准备'),
+                        //m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: ctr.exit}, '退出')
                     ])
                 ])
             ])

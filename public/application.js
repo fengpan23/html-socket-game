@@ -1,14 +1,14 @@
 
 var mithril = require('mithril');
 /* override m.request to provide default cookie authentication */
-mithril._request = mithril.request.bind(mithril);
+var _request = mithril.request.bind(mithril);
 mithril.request = function (option) {
     if (option && !option.config) {
         option.config = function (xhr) {
             xhr.withCredentials = true;
         };
     }
-    return mithril._request(option);
+    return _request(option);
 };
 
 var Application = {
@@ -56,7 +56,8 @@ Application.loadComponents = function () {
         'login',
         'header',
         'navigation',
-        'room'
+        'room',
+        'user'
     ];
     components.forEach(function(com) {
         Application.Components[com] = require('./components/' + com + '/_index.js')(Application);
@@ -67,9 +68,9 @@ Application.loadGames = function () {
     var games = Application.config.games;
     for(var game in games){
         if(games[game].status === 'open'){
-            Application.Games[game] = require('./components/games/' + game + '/_index.js')(Application);
+            Application.Games[game] = require('./games/' + game + '/_index.js')(Application);
         }
-    };
+    }
 };
 
 Application.loadUtils = function() {
@@ -83,7 +84,7 @@ Application.loadUtils = function() {
     require('vex/css/vex-theme-plain.css');
 
     //other utils we defined in /utils/
-    var UTIL_PATH = './utils'
+    var UTIL_PATH = './utils';
     this.Util = require(UTIL_PATH + '/_index.js')(this);
 };
 
@@ -98,8 +99,8 @@ Application.loadStylesheets = function() {
     var games = Application.config.games;
     for(var game in games){
         if(games[game].status === 'open' && !games[game].noStyle){
-            require(STYLE_PATH + game + '/main.css');
+            require('./games/' + game + '/styles/main.css');
         }
-    };
+    }
 };
 module.exports = Application;

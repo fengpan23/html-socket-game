@@ -1,7 +1,13 @@
-module.exports = function(App) {
+module.exports = function(App, Opts) {
     var m = App.m;
     return function(){
-        var ws = App.Util.get('ws')();
+        var client = App.Util.get('engine');
+
+        client.on('init', function (data) {
+            //TODO: start timeout user ready
+            console.log(data);
+        });
+        client.init(Opts);
 
         var chess = {
             chessman: [],
@@ -11,16 +17,19 @@ module.exports = function(App) {
                 return ''+ _x + String.fromCharCode(_y);
             },
             getComponent: function (){
-                return require('../user.js')(App, ws);
+                return require('../user.js')(App);
             }
         };
+
         chess.ready = function () {
-            var data = {id: 0, event: 'initchinesechess', content:  {session:  App.session, gameid: 10000005, tableid: 67}};
-            ws.sendData(data);
-            ws.onData = function (ches) {
-                ches && chess.flash(ches);
-                m.redraw();
+
+            client.onData = function (ches) {
+                console.log('ches', ches);
+                //ches && chess.flash(ches);
+                //m.redraw();
             }
+
+            client.send('userjoin', {seatindex: 1});
         };
         chess.leave = function () {
             //TODO close the game socket
@@ -28,7 +37,7 @@ module.exports = function(App) {
         };
         chess.clickChess = function (e) {
             var chessman = e.target.id;
-            ws.sendData({id: 0, event: 'selecting', content: {chessman:chessman}});
+            client.sendData({id: 0, event: 'selecting', content: {chessman:chessman}});
             e.stopPropagation();
         };
         chess.clickBoard = function (e) {
