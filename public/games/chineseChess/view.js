@@ -9,10 +9,16 @@ module.exports = function(App) {
             ]),
             m('MAIN.mdl-layout__content mdl-color--grey-100', [
                 m('DIV.choose-seat', [
-                    //m('LABLE.mdl-radio mdl-js-radio mdl-js-ripple-effect', {onclick: ctr.ready}, '准备'),
-                    m('INPUT.mdl-radio__button', {type: 'radio', value: '1'}, [m('SPAN.radio__label', 'red')]),
-                    m('INPUT.mdl-radio__button', {type: 'radio', value: '1'}, [m('SPAN.radio__label', 'black')]),
-                    m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: ctr.exit}, '确定')
+                    m('DIV.timeout', ctr.timeout),
+                    m('LABEL.mdl-radio mdl-js-radio mdl-js-ripple-effect', {for: 'option-1'}, [
+                        m('INPUT#option-1.mdl-radio__button', {type: 'radio', value: '1', name:'options'}),
+                        m('SPAN.mdl-radio__label', 'red')
+                    ]),
+                    m('LABEL.mdl-radio mdl-js-radio mdl-js-ripple-effect', {for: 'option-2'}, [
+                        m('INPUT#option-2.mdl-radio__button', {type: 'radio', value: '2', name:'options'}),
+                        m('SPAN.mdl-radio__label', 'black')
+                    ]),
+                    m('DIV.mdl-button mdl-js-button mdl-button--raised mdl-button--colored game-btn', {onclick: ctr.ready}, '准备')
                 ]),
                 m('DIV.chinese-chess-chessboard', {onclick: ctr.clickBoard}, ctr.chessman.map(function (v) {
                     return m('span.base-st', {onclick: ctr.clickChess, id: v[2], class: v[0], style: {left: v[1].x + 'px', top: v[1].y + 'px', backgroundSize: '80px'}})

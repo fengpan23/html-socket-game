@@ -38,3 +38,13 @@ main{
     left: 50%;
     bottom: -25px;
 }
+
+/*over writer*/
+.vex.vex-theme-plain{
+    padding: 0 !important;
+}
+.vex.vex-theme-plain .vex-content{
+    width: 100% !important;
+    height: 100% !important;
+    padding: 2em !important;
+}

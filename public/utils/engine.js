@@ -24,5 +24,5 @@ module.exports = function(App){
         engine.trigger(ms.event, ms.content);
     });
 
-    return _.extend(engine, event);
+    return _.extend(engine, event, client);
 };

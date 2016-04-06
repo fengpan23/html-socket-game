@@ -1,22 +1,23 @@
 module.exports = function () {
     var Event = require('./Event')();
+    var ws;
 
     return _.extend({
         connect: function (ip, port) {
-            this.ws = new WebSocket("ws://" + ip + ":" + port);
             var _this = this;
-            this.ws.onopen = function () {
-                _this.ws.connected = true;
+            ws = new WebSocket("ws://" + ip + ":" + port);
+            ws.onopen = function () {
+                ws.connected = true;
                 // use this to connected game indirection
                 _this.trigger('connected');
             };
-            this.ws.onclose = function () {
+            ws.onclose = function () {
                 console.log('WebSocketClosed!');
             };
-            this.ws.onerror = function () {
+            ws.onerror = function () {
                 console.log('WebSocketError!');
             };
-            this.ws.onmessage = function (e) {
+            ws.onmessage = function (e) {
                 var message = {};
                 try {
                     message = JSON.parse(e.data);
@@ -32,13 +33,13 @@ module.exports = function () {
         },
 
         send: function (event, content) {
-            if (this.ws.connected && event) {
-                this.ws.send(JSON.stringify({event: event, content: content || {}}));
+            if (ws.connected && event) {
+                ws.send(JSON.stringify({id: 0, event: event, content: content || {}}));
             }
         },
 
         close: function () {
-            this.ws.close();
+            ws.close();
         }
     }, Event);
 };

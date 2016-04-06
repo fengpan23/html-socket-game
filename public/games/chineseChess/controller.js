@@ -4,12 +4,19 @@ module.exports = function(App, Opts) {
         var client = App.Util.get('engine');
 
         client.on('init', function (data) {
-            //TODO: start timeout user ready
-            console.log(data);
+            console.log('init : ', data);
+            var t = setInterval(function () {
+                chess.timeout--;
+                m.redraw();
+                if(chess.timeout === 0){
+                    clearInterval(t);
+                }
+            }, 1000);
         });
         client.init(Opts);
 
         var chess = {
+            timeout: 15,
             chessman: [],
             adaptive: function (x, y) {
                 var _x = Math.floor((x - 25) / 85) + 1;
@@ -17,19 +24,14 @@ module.exports = function(App, Opts) {
                 return ''+ _x + String.fromCharCode(_y);
             },
             getComponent: function (){
-                return require('../user.js')(App);
+                //return require('../user.js')(App);
             }
         };
 
         chess.ready = function () {
-
-            client.onData = function (ches) {
-                console.log('ches', ches);
                 //ches && chess.flash(ches);
                 //m.redraw();
-            }
-
-            client.send('userjoin', {seatindex: 1});
+            client.send('userjoin', {color: 'red'});
         };
         chess.leave = function () {
             //TODO close the game socket
