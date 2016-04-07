@@ -1,19 +1,34 @@
 main.domino-table{
     height: 640px;
     width: 960px;
-    background: url('./img/table-bg.jpg') no-repeat;
+    background: url('./img/table-bg.jpg') no-repeat 50%;
 }
 .domino-user{
     width: 131px;
     height: 131px;
     position: absolute;
-    background: url('./img/user.png') no-repeat;
-}
-.domino-user.user-point{
     text-align: center;
+    background: url('./img/user.png') no-repeat 50%;
+}
+.domino-user .user-name{
+    color: #C6D00B;
+}
+.domino-user .user-point{
+    position: absolute;
+    left: 0;
     bottom: 0;
-    margin: auto;
-    display: block;
+    width: 131px;
+    color: #FF0055;
+}
+.domino-user .user-cards{
+    width: 200px;
+    left: -30px;
+    position: absolute;
+}
+img.card{
+    width: 45px;
+}
+img.card-bg{
 }
 .domino-seat{
     width: 131px;
@@ -21,39 +36,68 @@ main.domino-table{
     position: absolute;
     background: url('./img/seat-1.png');
 }
+.user-bet{
+    position: absolute;
+}
+.user-bet .bet-icon{
+    float: left;
+    width: 27px;
+    height: 25px;
+    background: url('./img/chip_yellow.png');
+}
+.user-bet .bet-number{
+    position: absolute;
+    left: 10px;
+    width: 98px;
+    height: 25px;
+    padding: 0 20px;
+    background: url('./img/bet-bg.png') round;
+    color: white;
+    z-index: -1;
+}
 .seat-1{
     left: 670px;
     top: 10px;
 }
+.seat-1 .user-bet{
+    bottom: -20px;
+}
 .seat-2{
     left: 820px;
-    top: 210px;
+    top: 225px;
 }
-.seat-2.user-bet{
-    position: absolute;
+.seat-2 .user-bet{
     left: -80px;
 }
 .seat-3{
-    left: 730px;
-    top: 425px;
+    left: 700px;
+    top: 450px;
+}
+.seat-3 .user-bet{
+    top: -30px;
+    margin-left: 8px;
 }
 .seat-4{
-    left: 430px;
-    top: 425px;
+    left: 415px;
+    top: 450px;
 }
-.seat-4.user-bet{
-    position: absolute;
-    top: -20px;
+.seat-4 .user-bet{
+    top: -30px;
+    margin-left: 8px;
 }
 .seat-5{
     left: 130px;
-    top: 425px;
+    top: 450px;
+}
+.seat-5 .user-bet{
+    top: -30px;
+    margin-left: 8px;
 }
 .seat-6{
     left: 20px;
-    top: 210px;
+    top: 225px;
 }
 .seat-7{
-    left: 40px;
+    left: 160px;
     top: 10px;
 }
