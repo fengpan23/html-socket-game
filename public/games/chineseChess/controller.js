@@ -3,9 +3,10 @@ module.exports = function(App, Opts) {
     return function(){
         var client = App.Util.get('engine');
 
+        var t;
         client.on('init', function (data) {
-            console.log('init : ', data);
-            var t = setInterval(function () {
+            console.log('init data: ', data);
+            t = setInterval(function () {
                 chess.timeout--;
                 m.redraw();
                 if(chess.timeout === 0){
@@ -15,24 +16,36 @@ module.exports = function(App, Opts) {
         });
         client.init(Opts);
 
+        client.on('userjoin', function (data) {
+            chess.display = 'none';
+            chess.users.push(_.pick(data.user, 'name', 'point'));
+            m.redraw();
+        });
+        client.on('broadcast_userjoin', function (data) {
+            chess.users.push(_.pick(data.user, 'name', 'point'));
+            m.redraw();
+        });
+
         var chess = {
             timeout: 15,
+            display: 'block',
+            users: [],
             chessman: [],
             adaptive: function (x, y) {
                 var _x = Math.floor((x - 25) / 85) + 1;
                 var _y = 11 - Math.floor((y - 30) / 78) + 96;
                 return ''+ _x + String.fromCharCode(_y);
             },
-            getComponent: function (){
+            getComponent: function (name){
                 //return require('../user.js')(App);
             }
         };
 
         chess.ready = function () {
-                //ches && chess.flash(ches);
-                //m.redraw();
+            clearInterval(t);
             client.send('userjoin', {color: 'red'});
         };
+
         chess.leave = function () {
             //TODO close the game socket
             m.route('/home');

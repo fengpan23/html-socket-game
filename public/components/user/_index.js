@@ -1,3 +1,9 @@
+/**
+ * 此用于创建聊天组件
+ * @param App
+ * @returns {{controller: Function, view: Function}}
+ * @constructor
+ */
 module.exports = function User(App) {
     var m = App.m;
     return {

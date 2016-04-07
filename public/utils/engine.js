@@ -21,6 +21,7 @@ module.exports = function(App){
     };
 
     client.on('message', function (ms) {
+        console.log('client get message: ', ms);
         engine.trigger(ms.event, ms.content);
     });
 
