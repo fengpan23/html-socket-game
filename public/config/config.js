@@ -1,9 +1,9 @@
 module.exports = {
     games: {
-        chess: {
+        domino: {
             id: '10000006',
             status: 'open',
-            name: '国际象棋'
+            name: 'Domino'
         },
         chineseChess: {
             id: '10000008',
@@ -17,5 +17,5 @@ module.exports = {
             name: '三人麻将'
         }
     },
-    gameServer: {ip: '127.0.0.1', port: 30094}
+    gameServer: {ip: '127.0.0.1', port: 30092}
 };

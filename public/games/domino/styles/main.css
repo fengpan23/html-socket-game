@@ -1,0 +1,59 @@
+main.domino-table{
+    height: 640px;
+    width: 960px;
+    background: url('./img/table-bg.jpg') no-repeat;
+}
+.domino-user{
+    width: 131px;
+    height: 131px;
+    position: absolute;
+    background: url('./img/user.png') no-repeat;
+}
+.domino-user.user-point{
+    text-align: center;
+    bottom: 0;
+    margin: auto;
+    display: block;
+}
+.domino-seat{
+    width: 131px;
+    height: 131px;
+    position: absolute;
+    background: url('./img/seat-1.png');
+}
+.seat-1{
+    left: 670px;
+    top: 10px;
+}
+.seat-2{
+    left: 820px;
+    top: 210px;
+}
+.seat-2.user-bet{
+    position: absolute;
+    left: -80px;
+}
+.seat-3{
+    left: 730px;
+    top: 425px;
+}
+.seat-4{
+    left: 430px;
+    top: 425px;
+}
+.seat-4.user-bet{
+    position: absolute;
+    top: -20px;
+}
+.seat-5{
+    left: 130px;
+    top: 425px;
+}
+.seat-6{
+    left: 20px;
+    top: 210px;
+}
+.seat-7{
+    left: 40px;
+    top: 10px;
+}
