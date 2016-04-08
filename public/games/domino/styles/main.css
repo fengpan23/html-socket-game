@@ -20,22 +20,53 @@ main.domino-table{
     width: 131px;
     color: #FF0055;
 }
+
 .domino-user .user-cards{
     width: 200px;
     left: -30px;
+    top: 0;
     position: absolute;
 }
+
+.me .cards{
+    top: -30px;
+    left: -50px;
+    width: 355px;
+    position: absolute;
+}
+.me .cards .cards-content{
+    background: url('./img/card-frame-me.png');
+    background-size: 100% 100%;
+    float: left;
+    padding: 0 12px;
+}
+.user .cards{
+    top: -30px;
+    left: -50px;
+    width: 255px;
+    background: url('./img/card-frame.png') no-repeat;
+}
+
+.card-bk{
+    margin-left: 60px;
+    margin-top: 60px;
+}
+.operate-btn{
+    margin-top: 570px;
+    margin-left: 15px;
+    width: 100px;
+}
 img.card{
-    width: 45px;
+    padding-top: 28px;
 }
-img.card-bg{
-}
+
 .domino-seat{
     width: 131px;
     height: 131px;
     position: absolute;
     background: url('./img/seat-1.png');
 }
+
 .user-bet{
     position: absolute;
 }
@@ -60,14 +91,23 @@ img.card-bg{
     top: 10px;
 }
 .seat-1 .user-bet{
-    bottom: -20px;
+    top: 140px;
+    left: -20px;
 }
+.seat-1.me .cards{
+    top: 0px;
+}
+.seat-1.user .cards{
+
+}
+
 .seat-2{
     left: 820px;
     top: 225px;
 }
 .seat-2 .user-bet{
-    left: -80px;
+    left: -110px;
+    top: 60px;
 }
 .seat-3{
     left: 700px;
@@ -97,7 +137,15 @@ img.card-bg{
     left: 20px;
     top: 225px;
 }
+.seat-6 .user-bet{
+    top: 70px;
+    left: 120px;
+}
 .seat-7{
     left: 160px;
     top: 10px;
+}
+.seat-7 .user-bet{
+    top: 140px;
+    left: 40px;
 }
