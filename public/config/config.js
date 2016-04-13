@@ -17,5 +17,5 @@ module.exports = {
             name: '三人麻将'
         }
     },
-    gameServer: {ip: '127.0.0.1', port: 30092}
+    gameServer: {ip: '192.168.1.120', port: 30092}
 };

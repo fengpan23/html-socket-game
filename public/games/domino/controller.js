@@ -1,18 +1,7 @@
 module.exports = function(App, Opts) {
-    var m = App.m;
+    var m = App.m, timeout;
     return function(){
         var client = App.Util.get('engine'), t;
-        client.on('init', function (data) {
-            t = setInterval(function () {
-                domino.timeout--;
-                m.redraw();
-                domino.timeout === 0 && clearInterval(t);
-            }, 1000);
-
-            data.users && redraw(data.users);
-        });
-        client.init(Opts);
-
         function redraw(data){
             var user = data;
             if(data['user'])user = data['user'];
@@ -26,15 +15,27 @@ module.exports = function(App, Opts) {
             m.redraw();
         }
 
+        client.init(Opts);
+        client.on('init', function (data) {
+            timeout = data.game.operatetime;
+            t = setInterval(function () {
+                domino.timeout--;
+                m.redraw();
+                domino.timeout === 0 && clearInterval(t);
+            }, 1000);
+
+            data.users && redraw(data.users);
+        });
         client.on('userjoin', redraw);
         client.on('broadcast_userjoin', redraw);
         client.on('broadcast_blinds', function (data) {
             for(var key in data.game){
                 let sid =  data.game[key].seatindex;
                 if(sid){
-                    _.extend(_.findWhere(domino.seats, {sid: sid}), _.pick(data.game[key], 'betstake'));
+                    _.extend(_.findWhere(domino.seats, {sid: sid}), _.pick(data.game[key], 'betstake', 'point'));
                 }else{
-                    domino.bet = data.game[key][domino.sid] || 0;
+                    domino.followVal(data.game[key][domino.sid] || 0);
+                    domino.betVal(domino.followVal() * 2);
                 }
             }
             m.redraw();
@@ -45,11 +46,31 @@ module.exports = function(App, Opts) {
         });
         client.on('broadcast_cards', function (data) {
             var index = _.findIndex(domino.seats, {sid: data.game.seatindex});
-            domino.seats[index].cardsnum = (domino.seats[index].cardsnum || 0) + data.game.cardsnum;
+            domino.seats[index].cardsnum = (domino.seats[index].cardsnum || 0)%4 + data.game.cardsnum;
             m.redraw();
         });
+
+        var interval;
         client.on('nextuser', function (data) {
-            domino.operate = data.user.operate;
+            clearInterval(interval);
+            _.each(domino.seats, function(seat){seat.timeout = 0;});
+            domino.operate = _.omit(data.user.operate, 'change');
+            domino.timeout = timeout;
+            interval = setInterval(function(){
+                if(domino.timeout < 1){
+                    domino.operate = {};
+                    return clearInterval(interval);
+                }
+                domino.timeout -= 1;
+                m.redraw();
+            }, 1000);
+            m.redraw();
+        });
+        client.on('broadcast_nextuser', function (data) {
+            clearInterval(interval);
+            var nid = data.game.nextplayer;
+            var user = _.findWhere(domino.seats, {sid: nid});
+            user.timeout = timeout;
             m.redraw();
         });
         
@@ -59,26 +80,38 @@ module.exports = function(App, Opts) {
             m.redraw();
         });
 
-
-        client.on("pass", function () {
-            
+        client.on('broadcast_pass', function (data) {
+            console.log('data: ', data);
         });
-        client.on("broadcast_pass", function () {
-
+        client.on('broadcast_bet', function (data) {
+            var user = _.findWhere(domino.seats, {sid: data.user.seatindex});
+            user.betstake = data.user.bettotal;
+            user.point = data.user.point;
+            var val = data.game.prompt[domino.sid] || 0;
+            domino.followVal(val);
+            domino.betVal(val * 2);
+            m.redraw();
         });
-        client.on("broadcast_bet", function (data) {
-            console.log('on bet data: ', data);
-        });
 
-        client.on("broadcast_fold", function (data) {
+        client.on('broadcast_fold', function (data) {
             console.log('fold data: ', data);
+        });
+
+        client.on('broadcast_over', function (data) {
+            console.log('over data: ', data);
+            domino.seats.forEach(function (seat) {
+                seat.cardsnum = 0;
+            });
         });
 
         var domino = {
             sid: 0,
-            timeout: 15,
+            timeout: 15,    //choose seat timeout
             operate: {},
-            seats: [{sid: 1}, {sid: 2}, {sid: 3}, {sid: 4}, {sid: 5}, {sid: 6}, {sid: 7}]
+            betVal: m.prop(),
+            followVal: m.prop(),
+            seats: [{sid: 1}, {sid: 2}, {sid: 3}, {sid: 4}, {sid: 5}, {sid: 6}, {sid: 7}],
+            bets: [{name: '1 pot', value: 20}, {name: '2 pot', value: 40}, {name: 'All In', value: 100}]
         };
 
         domino.seat = function (e) {
@@ -92,7 +125,7 @@ module.exports = function(App, Opts) {
             //TODO close the game socket
             m.route('/home');
         };
-        
+
         domino.change = function () {
             var user = _.findWhere(domino.seats, {sid: domino.sid});
             var temp = user.cards[0];
@@ -102,25 +135,32 @@ module.exports = function(App, Opts) {
             user.cards[i-1] = temp;
             client.send('change', {cards: user.cards});
         };
-        
+
         domino.confirm = function () {
-            
+            var cards = _.findWhere(domino.seats, {sid: domino.sid}).cards;
+            client.send('confirm', {cards: cards});
         };
 
         domino.pass = function () {
+            client.send('pass');
+        };
 
-        };
-        
         domino.follow = function () {
-            client.send('bet', {betstake: domino.bet});
+            client.send('bet', {betstake: domino.followVal()});
         };
-        
+
+        domino.bet = function () {
+            client.send('bet', {betstake: domino.betVal()});
+        };
+
         domino.fold = function () {
             client.send('fold');
         };
-        
-        domino.bet = function () {
-            
+
+        domino.catch = function () {
+            //表完态  清除倒计时 时间
+            console.log('catch click !!!');
+            domino.operate = {};
         };
         
         return domino;
