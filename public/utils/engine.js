@@ -21,7 +21,8 @@ module.exports = function(App){
     };
 
     client.on('message', function (ms) {
-        console.log('client get message: ', ms);
+        var time = new Date().toTimeString();
+        console.log(time.substring(0, 8), ms);
         engine.trigger(ms.event, ms.content);
     });
 

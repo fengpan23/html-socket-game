@@ -81,7 +81,9 @@ module.exports = function(App, Opts) {
         });
 
         client.on('broadcast_pass', function (data) {
-            console.log('data: ', data);
+            var user = _.findWhere(domino.seats, {sid: data.game.seatindex});
+            user.timeout = 0;
+            m.redraw();
         });
         client.on('broadcast_bet', function (data) {
             var user = _.findWhere(domino.seats, {sid: data.user.seatindex});
@@ -93,14 +95,24 @@ module.exports = function(App, Opts) {
             m.redraw();
         });
 
+        client.on('broadcast_pools', function(data){
+            console.log('broadcast_pools: ', data);
+        });
+
         client.on('broadcast_fold', function (data) {
             console.log('fold data: ', data);
+        });
+
+        client.on('broadcast_confirm', function (data) {
+            var user = _.findWhere(domino.seats, {sid: data.game.seatindex});
+            user.timeout = 0;
         });
 
         client.on('broadcast_over', function (data) {
             console.log('over data: ', data);
             domino.seats.forEach(function (seat) {
                 seat.cardsnum = 0;
+                seat.timeout = 0;
             });
         });
 
