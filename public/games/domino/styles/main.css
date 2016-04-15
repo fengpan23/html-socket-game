@@ -90,7 +90,7 @@ main.domino-table{
 }
 .operate{
     position: absolute;
-    top: 590px;
+    top: 600px;
 }
 .operate-btn{
     margin-left: 15px;
@@ -104,6 +104,9 @@ main.domino-table{
 }
 .operate .btn-follow{
     width: 150px;
+}
+.operate .value-follow{
+    float: right;
 }
 
 img.card{
@@ -270,10 +273,11 @@ main .timeout .time{
 }
 
 .bet-content{
-    top: -40px;
+    top: -30px;
     left: 360px;
     position: absolute;
     width: 250px;
+    padding-top: 2px;
     background: rgba(0, 188, 212, 0.26);
 }
 .bet-content .bet-default{
@@ -291,6 +295,15 @@ main .timeout .time{
 }
 .bet-content .bet-slider input{
     width: 98%;
+}
+.pools{
+    position: absolute;
+    top: 150px;
+    left: 400px;
+    color: white;
+}
+.pools span{
+    margin: 10px;
 }
 
 

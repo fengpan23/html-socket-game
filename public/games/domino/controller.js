@@ -2,6 +2,7 @@ module.exports = function(App, Opts) {
     var m = App.m, timeout;
     return function(){
         var client = App.Util.get('engine'), t;
+        m.redraw.strategy("diff");
         function redraw(data){
             var user = data;
             if(data['user'])user = data['user'];
@@ -45,8 +46,10 @@ module.exports = function(App, Opts) {
             m.redraw();
         });
         client.on('broadcast_cards', function (data) {
-            var index = _.findIndex(domino.seats, {sid: data.game.seatindex});
-            domino.seats[index].cardsnum = (domino.seats[index].cardsnum || 0)%4 + data.game.cardsnum;
+            data.seatindex.forEach(function (id) {
+                var user = _.findWhere(domino.seats, {sid: id});
+                user.cardsnum = (user.cardsnum || 0) + data.cardsnum;
+            });
             m.redraw();
         });
 
@@ -96,18 +99,35 @@ module.exports = function(App, Opts) {
         });
 
         client.on('broadcast_pools', function(data){
-            console.log('broadcast_pools: ', data);
+            domino.pools = [];
+            data.game.forEach(function (pool) {
+                domino.pools.push(_.pick(pool, 'point'));
+            });
+            domino.seats.forEach(function(seat){
+                seat.betstake = 0;
+            });
         });
 
         client.on('broadcast_fold', function (data) {
-            console.log('fold data: ', data);
+            var user = _.findWhere(domino.seats, {sid: data.seatindex});
+            delete user.cardsnum;
+            delete user.cards;
+            delete user.cardvalues;
+            delete user.timeout;
+            m.redraw();
         });
 
         client.on('broadcast_confirm', function (data) {
             var user = _.findWhere(domino.seats, {sid: data.game.seatindex});
             user.timeout = 0;
         });
-
+        
+        client.on('broadcast_billing', function (data) {
+            for(var sid in data.users){
+                _.extend(_.findWhere(domino.seats, {sid: sid}), _.pick(data.users[sid], 'cards', 'cardvalues', 'type'));
+            }
+        });
+        
         client.on('broadcast_over', function (data) {
             console.log('over data: ', data);
             domino.seats.forEach(function (seat) {
@@ -122,6 +142,7 @@ module.exports = function(App, Opts) {
             operate: {},
             betVal: m.prop(),
             followVal: m.prop(),
+            pools: [],
             seats: [{sid: 1}, {sid: 2}, {sid: 3}, {sid: 4}, {sid: 5}, {sid: 6}, {sid: 7}],
             bets: [{name: '1 pot', value: 20}, {name: '2 pot', value: 40}, {name: 'All In', value: 100}]
         };

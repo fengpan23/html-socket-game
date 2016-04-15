@@ -57,10 +57,13 @@ module.exports = function(App) {
                         m('DIV.bet-default', ctr.bets.map(function (b) {
                             return m('BUTTON.bet-btn', {onclick: m.withAttr("value", ctr.betVal), value: b.value}, b.name);
                         })),
-                        m('DIV.bet-slider', m('INPUT', {type: 'range', min: 0,  max: 100, onchange: m.withAttr("value", ctr.betVal), value: ctr.betVal()}))
+                        m('DIV.bet-slider', m('INPUT.mdl-slider mdl-js-slider', {type: 'range', min: 0,  max: 100, onchange: m.withAttr("value", ctr.betVal), value: ctr.betVal()}))
                     ]) : ''
                 ),
-                m('DIV.timeout', {style: {display: _.isEmpty(ctr.operate) ? 'none' : ''}}, m('SPAN.time', ctr.timeout))
+                m('DIV.timeout', {style: {display: _.isEmpty(ctr.operate) ? 'none' : ''}}, m('SPAN.time', ctr.timeout)),
+                m('DIV.pools', ctr.pools.map(function (pool) {
+                    return m('SPAN', pool.point);
+                }))
             )
         )
     }
