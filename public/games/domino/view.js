@@ -47,7 +47,7 @@ module.exports = function(App) {
             }), m('DIV.operate', {onclick: ctr.catch},
                     _.pairs(ctr.operate).map(function (op) {
                         var v = [m('SPAN', op[0])];
-                        if(op[0] === 'bet' || op[0] === 'follow')v.push(m('SPAN.value-' + op[0], '(' + ctr[op[0] + 'Val']() + ')'));
+                        if(op[0] === 'bet' || op[0] === 'follow')v.push(m('SPAN.value-bet', '(' + ctr[op[0] + 'Val']() + ')'));
 
                         return m('BUTTON.mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored operate-btn btn-' + op[0], {
                             disabled: !op[1], onclick: ctr[op[0]]
@@ -57,7 +57,7 @@ module.exports = function(App) {
                         m('DIV.bet-default', ctr.bets.map(function (b) {
                             return m('BUTTON.bet-btn', {onclick: m.withAttr("value", ctr.betVal), value: b.value}, b.name);
                         })),
-                        m('DIV.bet-slider', m('INPUT.mdl-slider mdl-js-slider', {type: 'range', min: 0,  max: 100, onchange: m.withAttr("value", ctr.betVal), value: ctr.betVal()}))
+                        m('DIV.bet-slider', m('INPUT', {type: 'range', min: 0,  max: 100, onchange: m.withAttr("value", ctr.betVal), value: ctr.betVal()}))
                     ]) : ''
                 ),
                 m('DIV.timeout', {style: {display: _.isEmpty(ctr.operate) ? 'none' : ''}}, m('SPAN.time', ctr.timeout)),

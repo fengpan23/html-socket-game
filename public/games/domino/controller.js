@@ -109,7 +109,7 @@ module.exports = function(App, Opts) {
         });
 
         client.on('broadcast_fold', function (data) {
-            var user = _.findWhere(domino.seats, {sid: data.seatindex});
+            var user = _.findWhere(domino.seats, {sid: data.game.seatindex});
             delete user.cardsnum;
             delete user.cards;
             delete user.cardvalues;

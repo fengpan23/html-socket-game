@@ -105,8 +105,9 @@ main.domino-table{
 .operate .btn-follow{
     width: 150px;
 }
-.operate .value-follow{
+.operate .value-bet{
     float: right;
+    margin-right: 25px;
 }
 
 img.card{
